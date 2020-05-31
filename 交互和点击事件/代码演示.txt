@@ -1,0 +1,53 @@
+     <div id="main" style="width:600px;height:500px;float:left"></div>
+
+mounted(){
+    var echarts = require('echarts');
+    var myChart1 = echarts.init(document.getElementById('main'));
+    
+// 绘制图表
+    myChart1.setOption({
+  title : {
+        text: '某站点用户访问来源',
+        subtext: '纯属虚构',
+        x:'center'
+    },
+    tooltip : {
+        trigger: 'item',
+        formatter: "{a} <br/>{b} : {c} ({d}%)"
+    },
+    legend: {
+        orient : 'vertical',
+        x : 'left',
+        data:['直接访问','邮件营销','联盟广告','视频广告','搜索引擎']
+    },
+    calculable : true,
+    series : [
+        {
+            name:'访问来源',
+            type:'pie',
+            radius : '55%',
+            center: ['50%', 225],
+            data:[
+                {value:335, name:'直接访问'},
+                {value:310, name:'邮件营销'},
+                {value:234, name:'联盟广告'},
+                {value:135, name:'视频广告'},
+                {value:1548, name:'搜索引擎'}
+            ]
+        }
+    ]   
+    })
+//交互
+  myChart1.on('legendselectchanged', function (params) {
+      console.log(params)
+    // 获取点击图例的选中状态
+    var isSelected = params.selected[params.name];
+    // 在控制台中打印
+    console.log((isSelected ? '选中了' : '取消选中了') + '图例' + params.name);
+    // 打印所有图例的状态
+    console.log(params.selected);
+});
+//点击
+   myChart1.on('click', function (params) {
+    console.log(params.name);
+});   
