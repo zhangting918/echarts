@@ -1,0 +1,75 @@
+<div id="main" style="width:800px;height:500px"></div>
+mounted(){
+    var echarts = require('echarts');
+    var myChart = echarts.init(document.getElementById('main'));
+// 绘制图表
+    myChart.setOption({
+      title: {
+        text: '某楼盘销售情况'
+    },
+    tooltip: {
+        trigger: 'axis',
+        axisPointer: {
+            type: 'cross',
+            label: {
+                backgroundColor: '#6a79'
+            }
+        }
+    },
+    color:["#B4B4B4","#E5E4E9","#EEECEE"],
+    legend: {
+        data: ['意向', '预购', '成交']
+    },
+    toolbox: {
+        feature: {
+            saveAsImage: {}
+        }
+    },
+    grid: {
+        left: '3%',
+        right: '4%',
+        bottom: '3%',
+        containLabel: true
+    },
+    xAxis: [
+        {
+            type: 'category',
+            boundaryGap: false,
+            data: ['周一', '周二', '周三', '周四', '周五', '周六', '周日']
+        }
+    ],
+    yAxis: [
+        {
+            type: 'value'
+        }
+    ],
+    series: [
+        {
+            name: '意向',
+            type: 'line',
+            // stack: '总量',
+            areaStyle: {},
+            smooth: true,
+            data: [1250, 1100, 520, 230, 120, 100, 0]
+        },
+        {
+            name: '预购',
+            type: 'line',
+            // stack: '总量',
+            smooth: true,
+            areaStyle: {},
+            data: [160, 200, 442, 768, 358, 68, 0]
+        },
+        {
+            name: '成交',
+            type: 'line',
+            // stack: '总量',
+            smooth: true,
+            areaStyle: {},
+            data: [0, 4, 10, 28, 250, 780, 740]
+        }
+    ]
+    });
+   
+
+  }
